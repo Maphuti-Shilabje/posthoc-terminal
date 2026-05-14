@@ -73,8 +73,10 @@ export function DistributionProperties() {
   useEffect(() => {
     if (data.length === 0 || !histRef.current) return;
 
+    const containerWidth = histRef.current.clientWidth || 500;
+
     const plot = Plot.plot({
-      width: 500,
+      width: Math.max(containerWidth, 300),
       height: 200,
       style: {
         background: 'transparent',

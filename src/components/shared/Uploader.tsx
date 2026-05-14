@@ -1,8 +1,10 @@
 'use client';
+
 import React, { useRef } from 'react';
 import * as duckdb from '@duckdb/duckdb-wasm';
 import { getDuckDB } from '@/engine/duckdb';
 import { useGlobalStore } from '@/engine/state';
+import { Upload, Plus } from 'lucide-react';
 
 export function Uploader() {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -17,10 +19,10 @@ export function Uploader() {
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
       const tableName = file.name.replace('.csv', '').toLowerCase(); // e.g., candles, trades, signals
-      
+
       // Register file to DuckDB-Wasm virtual file system
       await db.registerFileHandle(file.name, file, duckdb.DuckDBDataProtocol.BROWSER_FILEREADER, true);
-      
+
       const conn = await db.connect();
       try {
         // Create table from CSV using the auto-reader
@@ -47,11 +49,25 @@ export function Uploader() {
         ref={fileInputRef} 
         onChange={handleFileUpload}
       />
+      
+      {/* Desktop: Full text button */}
       <button 
         onClick={() => fileInputRef.current?.click()}
-        className="bg-gray-800 text-emerald-400 px-3 py-1 rounded hover:bg-gray-700 transition-colors border border-gray-700 hover:border-emerald-500 shadow-sm"
+        className="hidden sm:flex items-center gap-2 bg-gray-800 text-emerald-400 px-3 py-1 rounded hover:bg-gray-700 transition-colors border border-gray-700 hover:border-emerald-500 shadow-sm text-xs font-medium"
+        title="Upload CSV or Parquet files"
       >
-        Upload Snapshots (CSV)
+        <Upload size={14} />
+        <span>Upload Snapshots (CSV)</span>
+      </button>
+
+      {/* Mobile: Icon-only button */}
+      <button 
+        onClick={() => fileInputRef.current?.click()}
+        className="sm:hidden flex items-center justify-center bg-gray-800 text-emerald-400 w-8 h-8 rounded hover:bg-gray-700 transition-colors border border-gray-700 hover:border-emerald-500 shadow-sm"
+        title="Upload CSV files"
+        aria-label="Upload files"
+      >
+        <Plus size={16} strokeWidth={2.5} />
       </button>
     </div>
   );

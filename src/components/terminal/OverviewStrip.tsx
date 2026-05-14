@@ -35,8 +35,8 @@ export function OverviewStrip() {
   }
 
   return (
-    <div className="flex items-center overflow-x-auto bg-gray-950/50 border-b border-gray-800 p-4 scrollbar-thin scrollbar-thumb-gray-800">
-      <div className="flex min-w-max">
+    <div className="flex items-center overflow-x-auto bg-gray-950/50 border-b border-gray-800 p-2 md:p-4 scrollbar-none md:scrollbar-thin scrollbar-thumb-gray-800">
+      <div className="flex min-w-max divide-x divide-gray-800">
         <MetricBox 
           title="Net Profit" 
           value={metrics.netProfit} 
@@ -44,11 +44,11 @@ export function OverviewStrip() {
           isPositive={metrics.netProfit > 0 ? true : (metrics.netProfit < 0 ? false : null)} 
         />
         <MetricBox 
-          title="Total Closed Trades" 
+          title="Trades" 
           value={metrics.totalTrades} 
         />
         <MetricBox 
-          title="Percent Profitable" 
+          title="Win %" 
           value={metrics.percentProfitable} 
           subValue="%" 
           isPositive={metrics.percentProfitable >= 50 ? true : false}
@@ -59,7 +59,7 @@ export function OverviewStrip() {
           isPositive={metrics.profitFactor >= 1.5 ? true : (metrics.profitFactor < 1 ? false : null)}
         />
         <MetricBox 
-          title="Max Drawdown" 
+          title="Max DD" 
           value={metrics.maxDrawdown} 
           isCurrency 
           isPositive={false}
@@ -71,7 +71,7 @@ export function OverviewStrip() {
           isPositive={metrics.avgTrade > 0 ? true : (metrics.avgTrade < 0 ? false : null)}
         />
         <MetricBox 
-          title="Avg # Bars in Trade" 
+          title="Avg Bars" 
           value={metrics.avgBarsInTrade} 
         />
       </div>

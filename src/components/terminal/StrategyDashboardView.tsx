@@ -23,14 +23,14 @@ export function StrategyDashboardView() {
         </div>
 
         {/* Bottom Section: Tables and Distributions */}
-        <div className="flex gap-6 h-[600px]">
+        <div className="flex flex-col lg:flex-row gap-6 h-auto lg:h-[600px]">
           {/* Left Column: Performance Table */}
-          <div className="flex-[1] min-w-0 shadow-md">
+          <div className="flex-[1] min-w-0 shadow-md min-h-[500px] lg:min-h-0">
             <PerformanceTable />
           </div>
           
           {/* Right Column: Distribution & Properties */}
-          <div className="flex-[1] min-w-0 shadow-md">
+          <div className="flex-[1] min-w-0 shadow-md min-h-[600px] lg:min-h-0">
             <DistributionProperties />
           </div>
         </div>

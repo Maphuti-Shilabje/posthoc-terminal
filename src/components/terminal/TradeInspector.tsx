@@ -16,8 +16,10 @@ export function TradeInspector() {
   useEffect(() => {
     if (!tradeDetails || !plotRef.current || trades.length === 0) return;
 
+    const containerWidth = plotRef.current.clientWidth || 280;
+
     const plot = Plot.plot({
-      width: 280,
+      width: Math.max(containerWidth, 240),
       height: 160,
       style: {
         background: 'transparent',

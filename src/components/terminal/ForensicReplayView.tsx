@@ -13,6 +13,7 @@ import { ResizablePanelGroup, ResizablePanel, ResizableHandle } from '@/componen
 import { StrategicAccordion } from '@/components/shared/StrategicAccordion';
 import { useIntelligence, WeaknessInsight } from '@/hooks/useIntelligence';
 import { useGlobalStore } from '@/engine/state';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
 import { Maximize2, Minimize2, AlertCircle, ShieldAlert } from 'lucide-react';
 
 function IntelSummary({ insights = [] }: { insights: WeaknessInsight[] }) {
@@ -60,6 +61,7 @@ function MCSummary() {
 export function ForensicReplayView() {
   const chartPanelRef = useRef<PanelImperativeHandle>(null);
   const [isLedgerMaximized, setIsLedgerMaximized] = useState(false);
+  const isMobile = useMediaQuery("(max-width: 1024px)");
   
   // Get intelligence data for sidebar summary
   const { insights, isLoading: isIntelLoading } = useIntelligence();
@@ -75,9 +77,17 @@ export function ForensicReplayView() {
   };
 
   return (
-    <ResizablePanelGroup orientation="horizontal" className="h-full w-full">
-      {/* Main Stage (Chart + Ledger) */}
-      <ResizablePanel defaultSize={80} minSize={50} maxSize={90} className="min-w-0">
+    <ResizablePanelGroup 
+      orientation={isMobile ? "vertical" : "horizontal"} 
+      className="h-full w-full"
+    >
+      {/* Main Stage (Chart + Ledger) - LEFT on desktop, TOP on mobile */}
+      <ResizablePanel 
+        defaultSize={isMobile ? 70 : 80} 
+        minSize={isMobile ? 30 : 50} 
+        maxSize={isMobile ? 90 : 90} 
+        className="min-w-0"
+      >
         <ResizablePanelGroup orientation="vertical">
           
           {/* Chart Panel */}
@@ -126,9 +136,14 @@ export function ForensicReplayView() {
 
       <ResizableHandle withHandle />
 
-      {/* Diagnostic Sidebar */}
-      <ResizablePanel defaultSize={20} minSize={15} maxSize={35} className="min-w-0">
-        <div className="h-full flex flex-col bg-gray-950 overflow-y-auto divide-y divide-gray-800 border-l border-gray-800 min-w-0">
+      {/* Diagnostic Sidebar - RIGHT on desktop, BOTTOM on mobile */}
+      <ResizablePanel 
+        defaultSize={isMobile ? 30 : 20} 
+        minSize={isMobile ? 10 : 15} 
+        maxSize={isMobile ? 90 : 35}
+        className="min-w-0"
+      >
+        <div className="h-full flex flex-col bg-gray-950 overflow-y-auto divide-y divide-gray-800 border-l lg:border-l border-t lg:border-t-0 border-gray-800 min-w-0">
           
           <StrategicAccordion title="Trade DNA Inspector" defaultOpen={true}>
             <div className="min-h-[400px]">
