@@ -2,6 +2,8 @@
 
 **Posthoc Terminal** is an institutional-grade, high-performance decision-analysis environment built for forensic trade reconstruction and probabilistic strategy audit. It moves beyond standard retail metrics, treating the browser as a heavy-duty visualization engine for complex quant data.
 
+**[Live Demo: posthoc-terminal.vercel.app](https://posthoc-terminal.vercel.app/)**
+
 ![Dashboard Preview](public/assets/dashboard/forensic_reply_dashboard.png)
 
 ## 🏛 The Philosophy

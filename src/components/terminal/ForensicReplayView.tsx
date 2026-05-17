@@ -83,9 +83,9 @@ export function ForensicReplayView() {
     >
       {/* Main Stage (Chart + Ledger) - LEFT on desktop, TOP on mobile */}
       <ResizablePanel 
-        defaultSize={isMobile ? 70 : 80} 
-        minSize={isMobile ? 30 : 50} 
-        maxSize={isMobile ? 90 : 90} 
+        defaultSize={isMobile ? 60 : 80} 
+        minSize={isMobile ? 40 : 50} 
+        maxSize={isMobile ? 80 : 90} 
         className="min-w-0"
       >
         <ResizablePanelGroup orientation="vertical">
@@ -93,7 +93,7 @@ export function ForensicReplayView() {
           {/* Chart Panel */}
           <ResizablePanel 
             panelRef={chartPanelRef} 
-            defaultSize={65} 
+            defaultSize={isMobile ? 50 : 65} 
             minSize={0} 
             collapsible
             onResize={(size) => setIsLedgerMaximized(size.asPercentage === 0)}
@@ -110,7 +110,11 @@ export function ForensicReplayView() {
           <ResizableHandle withHandle />
 
           {/* Ledger Panel */}
-          <ResizablePanel defaultSize={35} minSize={15} className="min-h-0">
+          <ResizablePanel 
+            defaultSize={isMobile ? 50 : 35} 
+            minSize={15} 
+            className="min-h-0"
+          >
             <div className="h-full flex flex-col bg-gray-950 overflow-hidden relative">
               <div className="sticky top-0 bg-gray-950/80 backdrop-blur-md text-gray-500 p-2 select-none border-b border-gray-800 z-10 font-bold shrink-0 flex justify-between items-center">
                 <span className="text-[10px] uppercase tracking-widest pl-1">Trade Ledger & Graveyard</span>
@@ -138,9 +142,9 @@ export function ForensicReplayView() {
 
       {/* Diagnostic Sidebar - RIGHT on desktop, BOTTOM on mobile */}
       <ResizablePanel 
-        defaultSize={isMobile ? 30 : 20} 
-        minSize={isMobile ? 10 : 15} 
-        maxSize={isMobile ? 90 : 35}
+        defaultSize={isMobile ? 40 : 20} 
+        minSize={isMobile ? 20 : 15} 
+        maxSize={isMobile ? 60 : 35}
         className="min-w-0"
       >
         <div className="h-full flex flex-col bg-gray-950 overflow-y-auto divide-y divide-gray-800 border-l lg:border-l border-t lg:border-t-0 border-gray-800 min-w-0">
